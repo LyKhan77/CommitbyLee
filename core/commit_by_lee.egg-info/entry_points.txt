@@ -1,0 +1,2 @@
+[console_scripts]
+commit-by-lee = commit_by_lee.cli:cli

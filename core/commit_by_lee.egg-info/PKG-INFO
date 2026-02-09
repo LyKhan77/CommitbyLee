@@ -1,0 +1,292 @@
+Metadata-Version: 2.4
+Name: commit-by-lee
+Version: 0.1.0
+Summary: Generate commit messages otomatis dengan AI, 100% lokal & privasi terjaga
+Home-page: https://github.com/lee/commit-by-lee
+Author: Lee
+Author-email: Lee <lee@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/lee/commit-by-lee
+Project-URL: Repository, https://github.com/lee/commit-by-lee
+Project-URL: Issues, https://github.com/lee/commit-by-lee/issues
+Keywords: git,commit,ai,llm,ollama,qwen
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Version Control :: Git
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: click>=8.1.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: gitpython>=3.1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
+# Commit by Lee 🚀
+
+**Generate commit messages otomatis dengan AI, 100% lokal & privasi terjaga**
+
+Commit by Lee adalah tool open-source yang menggunakan **Qwen3:4B** melalui Ollama untuk menghasilkan pesan commit yang deskriptif dan mengikuti standar Conventional Commits.
+
+## ✨ Fitur
+
+- 🤖 **AI-Powered** - Menggunakan Qwen3:4B untuk generate commit message berkualitas
+- 🌍 **Multilingual** - Support Bahasa Indonesia & English
+- 🎨 **Multiple Styles** - Conventional Commits, Emoji, atau Simple
+- ⚡ **Cepat** - Generate commit message dalam hitungan detik
+- 🔒 **Privasi Terjaga** - Tidak ada kode yang dikirim ke cloud publik
+- 🔌 **Ollama Integration** - Terhubung ke Ollama server (https://ollama.iotech.my.id)
+- 🖥️ **Cross-Platform** - Windows, macOS, Linux
+
+## 📦 Installation
+
+### Prerequisites
+
+- Python 3.11+
+- Git
+- Ollama server (atau gunakan https://ollama.iotech.my.id)
+
+### Install from PyPI (coming soon)
+
+```bash
+pip install commit-by-lee
+```
+
+### Install from Source
+
+```bash
+# Clone repository
+git clone https://github.com/lee/commit-by-lee.git
+cd commit-by-lee/core
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install in development mode
+pip install -e .
+```
+
+## 🚀 Usage
+
+### Basic Usage
+
+```bash
+# Stage your changes
+git add .
+
+# Generate commit message
+commit-by-lee generate
+
+# Auto-commit without confirmation
+commit-by-lee generate --yes
+
+# Use English
+commit-by-lee generate --lang en
+
+# Use emoji style
+commit-by-lee generate --style emoji
+```
+
+### Test Connection
+
+```bash
+# Test connection to Ollama server
+commit-by-lee test-connection
+```
+
+### Configuration
+
+```bash
+# Show current configuration
+commit-by-lee config
+```
+
+## ⚙️ Configuration
+
+### Environment Variables (.env)
+
+```bash
+# Ollama Configuration
+OLLAMA_HOST=https://ollama.iotech.my.id
+OLLAMA_MODEL=qwen3:4b
+OLLAMA_TIMEOUT=30
+OLLAMA_TEMPERATURE=0.7
+
+# App Configuration
+COMMIT_BY_LEE_LANGUAGE=id  # id or en
+COMMIT_BY_LEE_STYLE=conventional
+COMMIT_BY_LEE_AUTO_COMMIT=false
+```
+
+### Config File (~/.commit-by-lee.yaml)
+
+```yaml
+ollama:
+  host: https://ollama.iotech.my.id
+  model: qwen3:4b
+  timeout: 30
+  temperature: 0.7
+
+app:
+  language: id  # id or en
+  style: conventional
+  auto_commit: false
+```
+
+### Project Config (.commit-by-lee.yaml)
+
+Override global config for specific project:
+
+```yaml
+ollama:
+  model: qwen3:4b
+
+app:
+  language: en
+```
+
+## 🎨 Commit Message Styles
+
+### Conventional Commits (Default)
+
+```
+feat(auth): tambahkan autentikasi pengguna
+
+Implement OAuth2 login flow dengan Google provider
+```
+
+### Emoji Style
+
+```
+✨ feat: tambahkan autentikasi pengguna
+
+Implement OAuth2 login flow dengan Google provider
+```
+
+### Simple Style
+
+```
+Tambahkan fitur autentikasi pengguna dengan OAuth2
+```
+
+## 🌍 Multilingual Support
+
+### Bahasa Indonesia (Default)
+
+```bash
+commit-by-lee generate --lang id
+```
+
+Output:
+```
+feat(auth): tambahkan autentikasi pengguna
+
+Implement OAuth2 login flow dengan Google provider
+```
+
+### English
+
+```bash
+commit-by-lee generate --lang en
+```
+
+Output:
+```
+feat(auth): add user authentication
+
+Implement OAuth2 login flow with Google provider
+```
+
+## 🛠️ Development
+
+### Setup Development Environment
+
+```bash
+# Clone repository
+git clone https://github.com/lee/commit-by-lee.git
+cd commit-by-lee/core
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Run Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=commit_by_lee
+```
+
+### Code Style
+
+```bash
+# Format code
+black commit_by_lee/
+
+# Lint code
+flake8 commit_by_lee/
+
+# Type check
+mypy commit_by_lee/
+```
+
+## 📚 Documentation
+
+- [Installation Guide](docs/installation.md)
+- [Usage Guide](docs/usage.md)
+- [Configuration](docs/configuration.md)
+- [Development Guide](docs/development.md)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Qwen3:4B** by Alibaba for the excellent multilingual LLM
+- **Ollama** for the easy-to-use LLM runtime
+- **Conventional Commits** for the commit message standard
+
+## 📧 Contact
+
+Lee - [@lee](https://github.com/lee)
+
+## 🌟 Star History
+
+If you find this project helpful, please consider giving it a star! ⭐
+
+---
+
+Made with ❤️ by Lee
