@@ -46,7 +46,7 @@ Configure the extension in VSCode Settings:
 
 ### Settings
 
-- `commitbylee.ollamaHost` - Ollama server URL (default: `https://ollama.iotech.my.id`)
+- `commitbylee.ollamaHost` - Ollama server URL (default: `http://localhost:11434`)
 - `commitbylee.ollamaModel` - Model name (default: `qwen3:4b`)
 - `commitbylee.language` - Commit message language: `id` (Indonesian) or `en` (English)
 - `commitbylee.style` - Commit message style: `conventional`, `emoji`, or `simple`
@@ -57,7 +57,7 @@ Configure the extension in VSCode Settings:
 
 ```json
 {
-  "commitbylee.ollamaHost": "https://ollama.iotech.my.id",
+  "commitbylee.ollamaHost": "http://localhost:11434",
   "commitbylee.ollamaModel": "qwen3:4b",
   "commitbylee.language": "id",
   "commitbylee.style": "conventional",

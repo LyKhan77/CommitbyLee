@@ -4,6 +4,7 @@
   "description": "Generate commit messages automatically with AI using Ollama and Qwen3:4B",
   "version": "0.1.0",
   "publisher": "lee",
+  "icon": "bear.png",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -53,8 +54,8 @@
       "properties": {
         "commitbylee.ollamaHost": {
           "type": "string",
-          "default": "https://ollama.iotech.my.id",
-          "description": "Ollama server URL"
+          "default": "https://your-ollama-server.com",
+          "description": "Ollama server URL (e.g., http://localhost:11434 or your remote server)"
         },
         "commitbylee.ollamaModel": {
           "type": "string",

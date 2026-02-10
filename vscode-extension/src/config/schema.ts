@@ -18,7 +18,7 @@ export class ConfigManager {
     
     return {
       ollama: {
-        host: config.get<string>('ollamaHost', 'https://ollama.iotech.my.id'),
+        host: config.get<string>('ollamaHost', 'http://localhost:11434'),
         model: config.get<string>('ollamaModel', 'qwen3:4b'),
         temperature: config.get<number>('temperature', 0.7)
       },

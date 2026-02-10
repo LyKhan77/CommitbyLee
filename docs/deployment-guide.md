@@ -82,7 +82,7 @@ SETUP:
 1. Buka Settings (Ctrl+,)
 2. Search "commitbylee"
 3. Configure:
-   - Ollama Host: https://ollama.iotech.my.id
+   - Ollama Host: http://localhost:11434 (atau server Ollama Anda)
    - Model: qwen3:4b
    - Language: id (Indonesia) atau en (English)
    - Style: conventional

@@ -81,7 +81,7 @@ Setelah install, buka VSCode Settings (Ctrl+,) dan cari "commitbylee":
 
 ```json
 {
-  "commitbylee.ollamaHost": "https://ollama.iotech.my.id",
+  "commitbylee.ollamaHost": "http://localhost:11434",
   "commitbylee.ollamaModel": "qwen3:4b",
   "commitbylee.language": "id",
   "commitbylee.style": "conventional",

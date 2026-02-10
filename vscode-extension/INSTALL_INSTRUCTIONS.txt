@@ -16,7 +16,7 @@ SETUP KONFIGURASI:
 
 Setelah install, buka Settings (Ctrl+,) dan cari "commitbylee":
 
-  commitbylee.ollamaHost: https://ollama.iotech.my.id
+  commitbylee.ollamaHost: http://localhost:11434 (atau server Ollama Anda)
   commitbylee.ollamaModel: qwen3:4b
   commitbylee.language: id (untuk Indonesia) atau en (untuk English)
   commitbylee.style: conventional (atau emoji, simple)
@@ -59,7 +59,8 @@ TROUBLESHOOTING:
   • Connection failed:
     - Cek koneksi internet
     - Verifikasi Ollama host URL di settings
-    - Test: curl https://ollama.iotech.my.id/api/tags
+    - Pastikan Ollama server berjalan
+    - Test: curl http://localhost:11434/api/tags (ganti dengan URL server Anda)
 
   • No staged changes:
     - Stage dulu: git add .
