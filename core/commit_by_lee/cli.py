@@ -57,7 +57,8 @@ def cli():
               help='Commit message style')
 @click.option('--max-files', type=int, default=5,
               help='Maximum number of files to include in analysis')
-def generate(language, style, max_files):
+@click.option('--yes', '-y', is_flag=True, help='Automatically apply commit message without confirmation')
+def generate(language, style, max_files, yes):
     """Generate commit message from current git changes"""
     try:
         # Display banner
@@ -72,45 +73,49 @@ def generate(language, style, max_files):
         analyzer = DiffAnalyzer()
         generator = CommitMessageGenerator(ollama, config)
         
-        # Get language enum
-        lang = Language.INDONESIAN if language == 'id' else Language.ENGLISH
+        # Update config based on command line options
+        if language == 'id':
+            config.update(language='id')
         commit_style = CommitStyle(style)
         
         # Display progress
         with console.status("[bold yellow]Analyzing changes...") as status:
             # Get git diff
-            diff_result = analyzer.get_diff(max_files=max_files)
+            diff_text = analyzer.get_staged_diff()
             
-            if not diff_result['diff']:
+            if not diff_text:
                 console.print("[yellow]No changes detected to commit.[/yellow]")
                 return
             
+            # Analyze diff
+            analysis = analyzer.analyze_diff(diff_text)
+            
             # Display analysis
-            console.print(f"[green][OK][/green] Found {diff_result['stats']['files_changed']} file(s) changed")
-            console.print(f"   [dim]+{diff_result['stats']['insertions']} -{diff_result['stats']['deletions']}[/dim]")
+            console.print(f"[green][OK][/green] Found {analysis.stats.files_changed} file(s) changed")
+            console.print(f"   [dim]+{analysis.stats.insertions} -{analysis.stats.deletions}[/dim]")
             console.print()
             
             # Generate commit message
             status.update("[bold yellow]Generating commit message...]")
             
             result = generator.generate(
-                diff=diff_result['diff'],
-                language=lang,
+                diff=diff_text,
+                analysis=analysis,
                 style=commit_style
             )
         
         # Display result
         console.print(Panel(
-            result.message,
+            result.format_conventional(),
             title="[bold green]Generated Commit Message[/bold green]",
             border_style="green"
         ))
         
         # Ask to apply
-        if Confirm.ask("[bold yellow]Apply this commit message?[/bold yellow]", default=False):
+        if yes or Confirm.ask("[bold yellow]Apply this commit message?[/bold yellow]", default=False):
             # Apply commit
             import subprocess
-            subprocess.run(['git', 'commit', '-m', result.message], check=True)
+            subprocess.run(['git', 'commit', '-m', result.format_conventional()], check=True)
             console.print("[green][OK] Commit created successfully![/green]")
         
     except Exception as e:
