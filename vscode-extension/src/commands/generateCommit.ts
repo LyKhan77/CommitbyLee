@@ -13,15 +13,32 @@ export async function generateCommit(context: vscode.ExtensionContext) {
     outputChannel.appendLine('🤖 Commit by Lee');
     outputChannel.appendLine('');
     
+    // Check workspace first
+    const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+    if (!workspaceFolder) {
+      vscode.window.showErrorMessage('No workspace folder found. Please open a folder in VSCode.');
+      outputChannel.appendLine('✗ No workspace folder found');
+      outputChannel.show();
+      return;
+    }
+    
+    outputChannel.appendLine(`📁 Workspace: ${workspaceFolder.name}`);
+    outputChannel.appendLine('');
+    
     const config = ConfigManager.getConfig();
     const gitClient = new GitClient();
     const ollamaClient = new OllamaClient(config.ollama.host);
     
-    outputChannel.appendLine('🔌 Checking staged changes...');
+    outputChannel.appendLine('🔍 Checking for staged changes...');
     
     const diff = await gitClient.getStagedDiff();
     if (!diff || diff.trim().length === 0) {
-      vscode.window.showWarningMessage('No staged changes found. Please stage your changes first using git add.');
+      const message = 'No staged changes found.\n\nPlease stage your changes first:\n• Run: git add .\n• Or use Source Control panel to stage files';
+      vscode.window.showWarningMessage('No staged changes found. Please stage changes first using git add .');
+      outputChannel.appendLine('✗ No staged changes found');
+      outputChannel.appendLine('');
+      outputChannel.appendLine('Tip: Run "git add ." in terminal to stage changes');
+      outputChannel.show();
       return;
     }
     
@@ -88,5 +105,6 @@ export async function generateCommit(context: vscode.ExtensionContext) {
   } catch (error: any) {
     vscode.window.showErrorMessage(`Error: ${error.message}`);
     outputChannel.appendLine(`✗ Error: ${error.message}`);
+    outputChannel.show();
   }
 }
