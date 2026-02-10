@@ -85,8 +85,13 @@ export class CommitMessageFormatter {
     }
 
     if (lines.length > 1) {
-      const bodyStart = lines.findIndex(line => line.trim().length > 0);
-      if (bodyStart > 0) {
+      // Skip empty lines after subject, then capture body
+      let bodyStart = 1;
+      while (bodyStart < lines.length && lines[bodyStart].trim() === '') {
+        bodyStart++;
+      }
+      
+      if (bodyStart < lines.length) {
         commit.body = lines.slice(bodyStart).join('\n');
       }
     }
