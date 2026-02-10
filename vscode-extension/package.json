@@ -1,0 +1,110 @@
+{
+  "name": "commit-by-lee",
+  "displayName": "Commit by Lee - AI Commit Message Generator",
+  "description": "Generate commit messages automatically with AI using Ollama and Qwen3:4B",
+  "version": "0.1.0",
+  "publisher": "lee",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "keywords": [
+    "git",
+    "commit",
+    "ai",
+    "llm",
+    "ollama",
+    "qwen"
+  ],
+  "activationEvents": [
+    "onCommand:commitbylee.generate"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "commitbylee.generate",
+        "title": "Generate Commit Message",
+        "category": "Commit by Lee"
+      },
+      {
+        "command": "commitbylee.testConnection",
+        "title": "Test Ollama Connection",
+        "category": "Commit by Lee"
+      },
+      {
+        "command": "commitbylee.openConfig",
+        "title": "Open Configuration",
+        "category": "Commit by Lee"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "commitbylee.generate",
+        "key": "ctrl+shift+g",
+        "mac": "cmd+shift+g"
+      }
+    ],
+    "configuration": {
+      "title": "Commit by Lee",
+      "properties": {
+        "commitbylee.ollamaHost": {
+          "type": "string",
+          "default": "https://ollama.iotech.my.id",
+          "description": "Ollama server URL"
+        },
+        "commitbylee.ollamaModel": {
+          "type": "string",
+          "default": "qwen3:4b",
+          "description": "Ollama model name"
+        },
+        "commitbylee.language": {
+          "type": "string",
+          "enum": ["id", "en"],
+          "default": "id",
+          "description": "Commit message language (id = Indonesian, en = English)"
+        },
+        "commitbylee.style": {
+          "type": "string",
+          "enum": ["conventional", "emoji", "simple"],
+          "default": "conventional",
+          "description": "Commit message style"
+        },
+        "commitbylee.autoCommit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically commit without confirmation"
+        },
+        "commitbylee.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "LLM temperature (0-1)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.3.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0"
+  }
+}

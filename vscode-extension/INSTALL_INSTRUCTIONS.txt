@@ -1,0 +1,84 @@
+====================================
+Commit by Lee - VSCode Extension
+Version 0.1.0
+====================================
+
+QUICK INSTALL:
+
+1. Buka VSCode
+2. Tekan Ctrl+Shift+X (atau Cmd+Shift+X di Mac) untuk buka Extensions
+3. Klik menu "..." (tiga titik) di pojok kanan atas panel Extensions
+4. Pilih "Install from VSIX..."
+5. Browse dan pilih file: commit-by-lee-0.1.0.vsix
+6. VSCode akan menginstall extension dan reload otomatis
+
+SETUP KONFIGURASI:
+
+Setelah install, buka Settings (Ctrl+,) dan cari "commitbylee":
+
+  commitbylee.ollamaHost: https://ollama.iotech.my.id
+  commitbylee.ollamaModel: qwen3:4b
+  commitbylee.language: id (untuk Indonesia) atau en (untuk English)
+  commitbylee.style: conventional (atau emoji, simple)
+  commitbylee.autoCommit: false (jangan otomatis commit)
+
+CARA MENGGUNAKAN:
+
+1. Buat perubahan pada code kamu
+2. Stage perubahan:
+   - Git command: git add .
+   - Atau gunakan Source Control panel di VSCode
+3. Generate commit message:
+   - Tekan Ctrl+Shift+G (atau Cmd+Shift+G di Mac)
+   - Atau buka Command Palette (Ctrl+Shift+P) dan pilih:
+     "Commit by Lee: Generate Commit Message"
+4. Preview commit message yang di-generate AI
+5. Pilih aksi:
+   - Accept: Commit dengan message tersebut
+   - Edit: Edit message sebelum commit
+   - Cancel: Batalkan
+
+COMMANDS YANG TERSEDIAL:
+
+  • Ctrl+Shift+G          - Generate commit message
+  • Test Ollama Connection  - Test koneksi ke server
+  • Open Configuration      - Buka settings extension
+
+REQUIREMENTS:
+
+  • VSCode versi 1.85.0 atau lebih baru
+  • Git repository di project kamu
+  • Koneksi internet (untuk Ollama server)
+
+TROUBLESHOOTING:
+
+  • Extension tidak muncul:
+    - Pastikan VSCode versi 1.85.0+
+    - Reload VSCode setelah install
+
+  • Connection failed:
+    - Cek koneksi internet
+    - Verifikasi Ollama host URL di settings
+    - Test: curl https://ollama.iotech.my.id/api/tags
+
+  • No staged changes:
+    - Stage dulu: git add .
+    - Pastikan ada perubahan yang di-stage
+
+FITUR:
+
+  ✅ AI-powered commit message generation (Ollama + Qwen3:4B)
+  ✅ Multilingual support (Indonesia & English)
+  ✅ Multiple commit styles (Conventional, Emoji, Simple)
+  ✅ Interactive preview panel
+  ✅ Test koneksi Ollama
+  ✅ Keyboard shortcut (Ctrl+Shift+G)
+
+==================================================
+
+Info lebih lanjut:
+https://github.com/lee/commit-by-lee
+
+Created by Lee
+MIT License
+==================================================
